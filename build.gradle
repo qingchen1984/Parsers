@@ -34,3 +34,12 @@ dependencies {
 task compileTask << { 
     System.out.println "compiling..." 
 }
+
+findProject(':tests')?.with{
+	apply plugin: 'groovy'
+
+	test {
+		jvmArgs "-XX:MaxPermSize=256m"
+		forkEvery 200
+	}
+}
