@@ -30,3 +30,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 */
+
+task compileTask << { 
+    System.out.println "compiling..." 
+}

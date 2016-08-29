@@ -17,3 +17,13 @@ include 'services:webservice'
 */
 
 rootProject.name = 'Parsers'
+
+apply from: 'gradle/loadProperties.gradle'
+Map<String, String> buildProperties = ext.loadProperties(rootDir)
+gradle.rootProject {
+    buildscript {
+        repositories {
+            maven { url buildProperties.MAVEN_URL + buildProperties.CENTRAL_REPO }
+        }
+    }
+}
