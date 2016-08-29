@@ -1,0 +1,18 @@
+// Allow user specific property overrides in a properties file format in a single script
+ext.loadProperties = { File rootDir ->
+    def map = [:]
+    ["build.properties", "user.properties"].each {
+        File propsFile = new File(rootDir, it)
+        if (propsFile.exists()) {
+            Properties bndProps = new Properties()
+            propsFile.withInputStream { bndProps.load(it) }
+            for (def prop : bndProps.stringPropertyNames()) {
+                map[prop] = bndProps[prop]
+            }
+        }
+    }
+    for (def prop : (gradle.parent?.startParameter?.projectProperties ?: gradle.startParameter.projectProperties)) {
+        map[prop.key] = prop.value
+    }
+    map
+}
