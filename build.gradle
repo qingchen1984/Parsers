@@ -35,6 +35,10 @@ task compileTask << {
     System.out.println "compiling..." 
 }
 
+findProject(':sax')?.with{
+	apply plugin: 'groovy'
+}
+
 findProject(':tests')?.with{
 	apply plugin: 'groovy'
 
