@@ -1,8 +1,8 @@
-user.properties
 .gradle
-build
-Parsers.iml
-Parsers.ipr
-Parsers.iws
 .git
-
+.idea
+build
+parsers.iml
+parsers.ipr
+parsers.iws
+user.properties

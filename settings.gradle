@@ -18,18 +18,12 @@ include 'services:webservice'
 
 rootProject.name = 'Parsers'
 
-/*apply from: 'gradle/loadProperties.gradle'
+apply from: 'gradle/loadProperties.gradle'
 Map<String, String> buildProperties = ext.loadProperties(rootDir)
-gradle.rootProject {
-    buildscript {
-        repositories {
-            maven { url buildProperties.MAVEN_URL + buildProperties.CENTRAL_REPO }
-        }
-    }
-}*/
 
 def projects = [
 	'gradlew',
+	'libs',
 	'sax',
 	'tests'
 ]
@@ -40,3 +34,5 @@ for (def proj : projects) {
         include proj
     }
 }
+rootProject.name = 'parsers'
+
