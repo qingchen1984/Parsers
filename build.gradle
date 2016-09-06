@@ -1,33 +1,24 @@
 
-
 apply plugin: 'java'
 apply plugin: 'idea'
-
-repositories{
-	mavenCentral()
-}
-
 subprojects{
-	apply plugin: 'groovy'
+    apply plugin: 'groovy'
+    repositories {
+        jcenter()
+    }
 }
 
 project(':libs')?.with{
-	dependencies{
-		//compile 'org.json:json:20160810'
-        compile 'junit:junit:3.8.1'
-	}
+    dependencies {
+        compile 'org.slf4j:slf4j-api:1.7.13'
+        compile 'com.googlecode.json-simple:json-simple:1.1'
+        compile 'commons-lang:commons-lang:2.6:'
+        testCompile 'junit:junit:4.12'
+    }
 }
 
 project(':sax')?.with{
-	//task compile(dependsOn: ':libs')
-	dependencies{
-		compile project(':libs')
-	}
-}
-
-project(':tests')?.with{
-	test {
-		jvmArgs "-XX:MaxPermSize=256m"
-		forkEvery 200
-	}
+    dependencies{
+        compile project(':libs')
+    }
 }
