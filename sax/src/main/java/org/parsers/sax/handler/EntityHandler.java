@@ -12,41 +12,41 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class EntityHandler extends DefaultHandler {
 
+
+    private int tagsProcessed;
+    private String titleValue;
+    private String createDateValue;
+    private String resultsUrlValue;
+    private String dreReferenceValue;
+    private final int tagsToBeProcessed;
     private Boolean documentAvailable = false;
     private Boolean shouldCreateBuffer = false;
-    static final String DREREFERENCE_TAG = "DREREFERENCE";
-    static final String CREATE_DATE_TAG = "CREATE_DATE";
     static final String TITLE_TAG = "TITLE";
-    static final String RESULTSURL_TAG = "RESULTSURL";
     static final String DOCUMENT_TAG = "DOCUMENT";
+    static final String REFERENCE_TAG = "REFERENCE";
+    static final String RESULTSURL_TAG = "RESULTSURL";
+    static final String CREATE_DATE_TAG = "CREATE_DATE";
+    private static final String TIMEZONE = "GMT";
+    private static final String DATE_FORMAT = "dd-MMM-yyyy";
+    private static final String DREREFERENCE_FILTER = "_en_US";
+
     private static final String TITLE_HEAD_REPLACEMENT_PATTERN = "(?i)" +
-            "(^(intel\\ssecurity\\s-\\ssecurity\\sbulletin|" +
-            "mcafee\\ssecurity\\sbulletin)" +
-            "(:|\\s(-|\\u2013))\\s)";
+            "(^(title1\\sreplacement\\s-|" +
+            "title2)" +
+            "(\\scommon1\\scommon2:|\\s(-|\\u2013))\\s)";
     private static final String TITLE_TAIL_REPLACEMENT_PATTERN = "(?i)(\\s\\(sb[0-9]{5}\\)$)";
     private static final String SUPPORTED_SINGLE_QUOTE_UNICODE = "\u2019";
 
-    private static final String DATE_FORMAT = "dd-MMM-yyyy";
-    private static final String TIMEZONE = "GMT";
-    private static final String DREREFERENCE_FILTER = "_en_US";
-
     private final StringBuilder elementBuffer = new StringBuilder();
-    private final List<EntityBean> bulletinList = new ArrayList<>();
+    private final List<EntityBean> entityList = new ArrayList<>();
     private static Map<String, TagHandler> tagToFunction = new ConcurrentHashMap<>();
-
-    private int tagsProcessed;
-    private final int tagsToBeProcessed;
-    private String titleValue;
-    private String dreReferenceValue;
-    private String createDateValue;
-    private String resultsUrlValue;
 
     public EntityHandler(){
         super();
         tagToFunction.put(TITLE_TAG, (String tagValue) ->
                 titleValue = filterTitles(tagValue));
 
-        tagToFunction.put(DREREFERENCE_TAG, (String tagValue) ->
+        tagToFunction.put(REFERENCE_TAG, (String tagValue) ->
                 dreReferenceValue = tagValue.replace(DREREFERENCE_FILTER, GlobalConstants.EMPTY_TEXT));
 
         tagToFunction.put(CREATE_DATE_TAG, (String tagValue) ->
@@ -83,7 +83,7 @@ public class EntityHandler extends DefaultHandler {
         elementBuffer.setLength(0);
         if(DOCUMENT_TAG.equals(qName)) {
             documentAvailable = true;
-        } else if(DREREFERENCE_TAG.equals(qName) || TITLE_TAG.equals(qName) ||
+        } else if(REFERENCE_TAG.equals(qName) || TITLE_TAG.equals(qName) ||
                 RESULTSURL_TAG.equals(qName) || CREATE_DATE_TAG.equals(qName)){
             if(!documentAvailable){
                 throw new SAXException("Found entity " + qName + " out of order in the xml");
@@ -108,21 +108,21 @@ public class EntityHandler extends DefaultHandler {
 
         if(DOCUMENT_TAG.equals(qName)){
             documentAvailable = false;
-        } else if(DREREFERENCE_TAG.equals(qName) || TITLE_TAG.equals(qName) ||
+        } else if(REFERENCE_TAG.equals(qName) || TITLE_TAG.equals(qName) ||
                 RESULTSURL_TAG.equals(qName) || CREATE_DATE_TAG.equals(qName)){
             tagHandler.handleTag(elementBuffer.toString());
             shouldCreateBuffer = false;
         }
         if(tagsProcessed == tagsToBeProcessed) {
-            final EntityBean bulletin = new EntityBean(titleValue, resultsUrlValue,
+            final EntityBean entity = new EntityBean(titleValue, resultsUrlValue,
                     createDateValue, dreReferenceValue);
             resetValues();
-            bulletinList.add(bulletin);
+            entityList.add(entity);
         }
     }
 
-    public List<EntityBean> getBulletinList() {
-        return bulletinList;
+    public List<EntityBean> getEntityList() {
+        return entityList;
     }
 
 }
