@@ -9,7 +9,7 @@ public interface EntityParser {
 
     enum WHITE_LIST {
 
-        AUTONOMY("http://schemas.autonomy.com");
+        AUTONOMY("http://IamWhitelisted.com");
 
         private final String entity;
         WHITE_LIST(final String entity){
