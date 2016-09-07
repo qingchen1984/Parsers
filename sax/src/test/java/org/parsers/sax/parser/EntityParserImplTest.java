@@ -2,6 +2,7 @@ package org.parsers.sax.parser;
 
 import org.json.simple.JSONArray;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.parsers.commons.TestHelper;
 import org.parsers.commons.exceptions.ParserException;
 
@@ -81,6 +82,7 @@ public class EntityParserImplTest {
         }
     }
 
+    @Ignore
     @Test
     public void XXEAllowedForAutonomySchema() throws Exception{
         final String XXE_EXPLOIT_AUTONOMY_FIXTURE = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<!DOCTYPE root[\n" +
