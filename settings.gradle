@@ -2,7 +2,6 @@ rootProject.name = 'Parsers'
 
 def projects = [
         'sax',
-        'libs',
         'commons'
 ]
 

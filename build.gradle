@@ -18,23 +18,16 @@ subprojects{
     }
 }
 
-project(':libs')?.with{
-    dependencies {
+project(':commons')?.with{
+    dependencies{
         compile 'org.slf4j:slf4j-api:1.7.13'
         compile 'com.googlecode.json-simple:json-simple:1.1'
         compile 'commons-lang:commons-lang:2.6:'
     }
 }
 
-project(':commons')?.with{
-    dependencies{
-        compile project(':libs')
-    }
-}
-
 project(':sax')?.with{
     dependencies{
-        compile project(':libs')
         compile project(':commons')
     }
 }
