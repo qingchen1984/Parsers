@@ -31,10 +31,10 @@ public class EntityHandler extends DefaultHandler {
     private static final String DREREFERENCE_FILTER = "_en_US";
 
     private static final String TITLE_HEAD_REPLACEMENT_PATTERN = "(?i)" +
-            "(^(title1\\sreplacement\\s-|" +
-            "title2)" +
-            "(\\scommon1\\scommon2:|\\s(-|\\u2013))\\s)";
-    private static final String TITLE_TAIL_REPLACEMENT_PATTERN = "(?i)(\\s\\(sb[0-9]{5}\\)$)";
+            "(^(title1\\sreplacement\\s-\\scommon1\\scommon2|" +
+            "title2\\scommon1\\scommon2)" +
+            "(:|\\s(-|\\u2013))\\s)";
+    private static final String TITLE_TAIL_REPLACEMENT_PATTERN = "(?i)(\\s\\(tail[0-9]{5}\\)$)";
     private static final String SUPPORTED_SINGLE_QUOTE_UNICODE = "\u2019";
 
     private final StringBuilder elementBuffer = new StringBuilder();

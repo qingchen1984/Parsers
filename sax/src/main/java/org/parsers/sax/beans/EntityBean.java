@@ -21,11 +21,11 @@ public class EntityBean {
 
     @Override
     public String toString() {
-        final StringBuilder bulletin = new StringBuilder(100);
-        bulletin.append("{\"title\":\"").append(StringEscapeUtils.escapeJavaScript(title))
+        final StringBuilder entity = new StringBuilder(100);
+        entity.append("{\"title\":\"").append(StringEscapeUtils.escapeJavaScript(title))
                 .append("\", \"resultsUrl\":\"").append(StringEscapeUtils.escapeJavaScript(resultsUrl))
                 .append("\", \"createDate\":\"").append(createDate)
                 .append("\", \"dreReference\":\"").append(dreReference).append("\"}");
-        return bulletin.toString();
+        return entity.toString();
     }
 }
