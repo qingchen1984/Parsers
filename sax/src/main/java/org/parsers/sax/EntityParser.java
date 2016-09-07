@@ -1,6 +1,9 @@
 package org.parsers.sax;
 
 import org.json.simple.JSONArray;
+import org.json.simple.parser.ParseException;
+import org.parsers.sax.beans.EntityBean;
+import org.parsers.sax.handler.EntityHandler;
 
 import java.io.InputStream;
 import java.util.List;
@@ -21,8 +24,8 @@ public interface EntityParser {
         }
     }
 
-    //List<EntityBean> parseEntities(BulletinHandler bulletinHandler) throws ParseException;
-    //JSONArray processBulletinsAsJson() throws ParseException;
-    //InputStream getInput();
+    List<EntityBean> parseEntities(EntityHandler entityHandler) throws ParseException;
+    JSONArray processEntitiesAsJson() throws ParseException;
+    InputStream getInput();
 
 }
