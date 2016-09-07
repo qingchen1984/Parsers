@@ -5,7 +5,7 @@ import java.net.*;
 
 public class TestHelper {
 
-    public static URL getRealUrl(HttpURLConnection connectionMock){
+    public static URL getRealUrl(final HttpURLConnection connectionMock){
         final URLStreamHandler customUrlHandler = new URLStreamHandler() {
             @Override
             protected URLConnection openConnection(URL url) throws IOException {
