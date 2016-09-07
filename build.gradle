@@ -1,6 +1,11 @@
 
-apply plugin: 'java'
-apply plugin: 'idea'
+allprojects{
+	apply plugin: 'java'
+	apply plugin: 'idea'
+	tasks.idea.dependsOn(cleanIdea)
+	tasks.ideaModule.dependsOn(cleanIdeaModule)
+}
+
 subprojects{
     apply plugin: 'groovy'
     repositories {
