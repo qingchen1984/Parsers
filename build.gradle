@@ -1,3 +1,4 @@
+apply plugin: 'checkstyle'
 
 allprojects{
 	apply plugin: 'java'
@@ -13,6 +14,7 @@ subprojects{
     }
     dependencies{
         testCompile 'junit:junit:4.12'
+        testCompile 'org.mockito:mockito-all:2.0.2-beta'
     }
 }
 
@@ -24,8 +26,15 @@ project(':libs')?.with{
     }
 }
 
+project(':commons')?.with{
+    dependencies{
+        compile project(':libs')
+    }
+}
+
 project(':sax')?.with{
     dependencies{
         compile project(':libs')
+        compile project(':commons')
     }
 }

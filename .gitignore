@@ -2,7 +2,7 @@
 .git
 .idea
 build
-parsers.iml
-parsers.ipr
-parsers.iws
+**/*.iml
+**/*.ipr
+**/*.iws
 user.properties
