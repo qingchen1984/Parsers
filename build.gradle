@@ -1,16 +1,14 @@
-apply plugin: 'checkstyle'
+//apply plugin: 'checkstyle'
 
 allprojects{
 	apply plugin: 'java'
-	apply plugin: 'idea'
-	tasks.idea.dependsOn(cleanIdea)
-	tasks.ideaModule.dependsOn(cleanIdeaModule)
-}
-
-subprojects{
     apply plugin: 'groovy'
-    repositories {
-        jcenter()
+    apply plugin: 'idea'
+	//tasks.idea.dependsOn(cleanIdea)
+	//tasks.ideaModule.dependsOn(cleanIdeaModule)
+
+    repositories{
+    	jcenter()
     }
     dependencies{
         testCompile 'junit:junit:4.12'

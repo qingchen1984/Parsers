@@ -1,5 +1,10 @@
 rootProject.name = 'Parsers'
 
+buildscript{
+    apply from: 'gradle/loadProperties.gradle'
+    Map<String, String> buildProperties = ext.loadProperties(rootDir)
+}
+
 def projects = [
         'sax',
         'commons'
@@ -11,6 +16,3 @@ for (def proj : projects) {
         include proj
     }
 }
-
-apply from: 'gradle/loadProperties.gradle'
-Map<String, String> buildProperties = ext.loadProperties(rootDir)
