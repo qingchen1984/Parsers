@@ -3,6 +3,7 @@ package org.parsers.sax.parser;
 import org.json.simple.JSONArray;
 import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.experimental.categories.Category;
 import org.parsers.commons.TestHelper;
 import org.parsers.commons.exceptions.ParserException;
 
@@ -26,6 +27,7 @@ public class EntityParserImplTest {
         url = TestHelper.getRealUrl(connectionMock);
     }
 
+    @Category(SelectiveTestMarker.class)
     @Test
     public void canParseSingleBulletinUsingParserWithFixtureStream() throws Exception{
 
