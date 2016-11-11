@@ -14,14 +14,14 @@ allprojects{
         testCompile 'junit:junit:4.12'
         testCompile 'org.mockito:mockito-all:2.0.2-beta'
     }
-}
 
-test {
-    testLogging {
-            events "PASSED", "STARTED", "FAILED", "SKIPPED"
+    test {
+	testLogging {
+		events "PASSED", "STARTED", "FAILED", "SKIPPED"
 	}
-    useJUnit {
-            excludeCategories 'org.parsers.sax.parser.SelectiveTestMarker'
+	useJUnit {
+		excludeCategories 'org.parsers.sax.parser.SelectiveTestMarker'
+		}
 	}
 }
 
